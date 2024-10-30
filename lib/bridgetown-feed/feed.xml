@@ -9,10 +9,11 @@
   <updated>{{ site.time | date_to_xmlschema }}</updated>
   <id>{{ page.url | absolute_url | xml_escape }}</id>
 
-  {% assign title = site.metadata.title | default: site.metadata.name %}
+  {% assign title = collections[page.collection].title | append: " " | append: site.metadata.feed_byline %}
+
   {% if page.collection != "posts" %}
     {% assign collection = page.collection | capitalize %}
-    {% assign title = title | append: " | " | append: collection %}
+    {% assign title = collections[page.collection].title | append: " " | append: site.metadata.feed_byline %}
   {% endif %}
   {% if page.category %}
     {% assign category = page.category | capitalize %}
